@@ -6,13 +6,12 @@ default allow = false
 
 allow {
 	input.method = "GET"
-    input.path = [""]
+	input.path = [""]
 }
 
 allow {
 	input.method = "GET"
-    input.path = ["cars"]
-
+	input.path = ["cars"]
 }
 
 allow {
@@ -23,7 +22,7 @@ allow {
 allow {
 	input.method = "PUT"
 	input.path = ["cars", car_id]
-    has_role("manager")
+	has_role("manager")
 }
 
 allow {
@@ -35,28 +34,22 @@ allow {
 allow {
 	input.method = "GET"
 	input.path = ["cars", car_id, "status"]
-    employees[input.user]
+	employees[input.user]
 }
 
 allow {
 	input.method = "PUT"
 	input.path = ["cars", car_id, "status"]
-    has_role("car_admin")
+	has_role("car_admin")
 }
 
 has_role(name) {
 	employee := employees[input.user]
-    employee.roles[name]
+	employee.roles[name]
 }
 
 employees = {
-	"alice": {
-    	"roles": {"manager", "car_admin"},
-    },
-    "james": {
-    	"roles": {"manager"},
-    },
-    "kelly": {
-    	"roles": {"car_admin"},
-    },
+	"alice": {"roles": {"manager", "car_admin"}},
+	"james": {"roles": {"manager"}},
+	"kelly": {"roles": {"car_admin"}},
 }
